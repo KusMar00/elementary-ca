@@ -1,16 +1,16 @@
+// Dimensions and variables for the Canvas
 const size = 5;
-const width = 800;
-const height = 700;
-
-let rulevalue = 0;
-let row = new Array(width / size).fill(0);
 
 const c = document.getElementById("canvas");
-c.width = width;
-c.height = height;
+c.width = window.innerWidth;
+c.height = 2000;
 const ctx = c.getContext("2d");
 
+let rulevalue = 0;
+let row;
+
 const initRow = () => {
+  row = new Array((c.width - (c.width % size)) / size);
   for (let i = 0; i < row.length; i++) {
     row[i] = 0;
   }
@@ -18,9 +18,10 @@ const initRow = () => {
 };
 
 const draw = () => {
+  ctx.clearRect(0, 0, c.width, c.height);
   initRow();
-  clearCanvas();
-  for (let j = 0; j < height / size; j++) {
+
+  for (let j = 0; j < c.height / size; j++) {
     let y = j * size;
     ctx.moveTo(0, y);
     for (let i = 0; i < row.length; i++) {
@@ -32,6 +33,7 @@ const draw = () => {
   }
 };
 
+// Calculate the new state from a neighborhood
 const calculateState = (a, b, c) => {
   let ruleset = rulevalue.toString(2);
   while (ruleset.length < 8) {
@@ -42,6 +44,7 @@ const calculateState = (a, b, c) => {
   return parseInt(ruleset[value]);
 };
 
+// Calculate the next row of cells
 const nextGeneration = () => {
   let nextRow = [];
   let len = row.length;
@@ -55,10 +58,6 @@ const nextGeneration = () => {
   return nextRow;
 };
 
-const clearCanvas = () => {
-  ctx.clearRect(0, 0, c.width, c.height);
-};
-
 const updateRuleset = (value) => {
   value = parseInt(value);
   if (typeof value === "number" && value <= 256 && value >= 0) {
@@ -69,3 +68,10 @@ const updateRuleset = (value) => {
   }
   draw();
 };
+
+const updateDimensions = () => {
+  c.width = window.innerWidth;
+  draw();
+};
+
+window.onresize = updateDimensions;
