@@ -2,22 +2,24 @@ const size = 5;
 const width = 800;
 const height = 700;
 
-let rulevalue = 54;
+let rulevalue = 0;
 let row = new Array(width / size).fill(0);
+
+const c = document.getElementById("canvas");
+c.width = width;
+c.height = height;
+const ctx = c.getContext("2d");
 
 const initRow = () => {
   for (let i = 0; i < row.length; i++) {
-    row[Math.floor(row.length / 2)] = 1;
+    row[i] = 0;
   }
+  row[Math.floor(row.length / 2)] = 1;
 };
 
 const draw = () => {
-  var c = document.getElementById("canvas");
-  c.width = width;
-  c.height = height;
-  var ctx = c.getContext("2d");
   initRow();
-
+  clearCanvas();
   for (let j = 0; j < height / size; j++) {
     let y = j * size;
     ctx.moveTo(0, y);
@@ -53,4 +55,17 @@ const nextGeneration = () => {
   return nextRow;
 };
 
-draw();
+const clearCanvas = () => {
+  ctx.clearRect(0, 0, c.width, c.height);
+};
+
+const updateRuleset = (value) => {
+  value = parseInt(value);
+  if (typeof value === "number" && value <= 256 && value >= 0) {
+    rulevalue = value;
+  } else {
+    rulevalue = 0;
+    console.log("here");
+  }
+  draw();
+};
