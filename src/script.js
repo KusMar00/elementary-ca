@@ -17,10 +17,9 @@ const initRow = () => {
   row[Math.floor(row.length / 2)] = 1;
 };
 
-const draw = () => {
+function draw() {
   ctx.clearRect(0, 0, c.width, c.height);
   initRow();
-
   for (let j = 0; j < c.height / size; j++) {
     let y = j * size;
     ctx.moveTo(0, y);
@@ -31,7 +30,7 @@ const draw = () => {
     }
     row = nextGeneration();
   }
-};
+}
 
 // Calculate the new state from a neighborhood
 const calculateState = (a, b, c) => {
@@ -65,7 +64,6 @@ const updateRuleset = (value) => {
     draw();
   } else {
     rulevalue = null;
-    console.log("here");
     ctx.clearRect(0, 0, c.width, c.height);
   }
 };
