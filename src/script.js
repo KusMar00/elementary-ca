@@ -3,7 +3,7 @@ const size = 5;
 
 const c = document.getElementById("canvas");
 c.width = window.innerWidth;
-c.height = 2000;
+c.height = window.innerHeight;
 const ctx = c.getContext("2d");
 
 let rulevalue = 0;

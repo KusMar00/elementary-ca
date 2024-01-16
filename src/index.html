@@ -7,12 +7,17 @@
     <title>Hello, World</title>
   </head>
   <body>
-    <h2>Elementary Celular Automata</h3>
-    <form>
-      <label for="ruleset">Ruleset:</label>
-      <input oninput="updateRuleset(this.value)" type="text" id="ruleset" name="ruleset" placeholder="0-256"/>
-    </form>
-    <canvas id="canvas" style="border:1px solid #000000;"/>
+    <div class="header">
+      <h2 class="title">Elementary Celular Automata</h3>
+      <div class="controls">
+      <form>
+        <label for="ruleset">Ruleset:</label>
+        <input oninput="updateRuleset(this.value)" type="text" id="ruleset" name="ruleset" placeholder="0-256"/>
+      </form>
+      <a class="link" target="_blank" href="https://mathworld.wolfram.com/ElementaryCellularAutomaton.html">Docs</a>
+    </div>
+    </div>
+    <canvas id="canvas" />
     <script src="script.js" type="text/javascript"></script>
   </body>
 </html>
