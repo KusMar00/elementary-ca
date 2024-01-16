@@ -62,15 +62,17 @@ const updateRuleset = (value) => {
   value = parseInt(value);
   if (typeof value === "number" && value <= 256 && value >= 0) {
     rulevalue = value;
+    draw();
   } else {
-    rulevalue = 0;
+    rulevalue = null;
     console.log("here");
+    ctx.clearRect(0, 0, c.width, c.height);
   }
-  draw();
 };
 
 const updateDimensions = () => {
   c.width = window.innerWidth;
+  c.height = window.innerHeight;
   draw();
 };
 
